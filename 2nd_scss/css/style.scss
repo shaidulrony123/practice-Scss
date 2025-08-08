@@ -1,0 +1,100 @@
+@forward "../scss/base/index";
+
+@use "../scss/utils/index" as variables;
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+//mixins
+@mixin pera-style(){ //will be used for paragraph styling (whthout using variables)
+    font-family: variables.$font-family;
+    font-size: variables.$font-size-p;
+    color: variables.$color;
+    line-height: variables.$line-height;
+}
+ @mixin about-style($color, $background-color, $font-size, $font-weight, $font-style){ //will be used for about styling (with variables)
+    color: $color;
+    background-color: $background-color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+}
+
+//create mixin if else statement
+@mixin font-sizeStyle($font-size){
+    @if $font-size=="small"{
+        font-size: 14px;
+    }@else if $font-size=="medium"{
+        font-size: 18px;
+    }@else if $font-size=="large"{
+        font-size: 22px;
+    }@else{
+        font-size: 16px; //default size
+    }
+
+}
+//about
+#about{
+    p{
+
+        @include pera-style();
+    }
+    h2{
+        @include about-style(red, green, 25px, 700, italic);
+    }
+}
+
+//inheritance styling another class from another class
+.btn{
+    color: white;
+    background-color: variables.$primary-color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: variables.$border-radius;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover{
+        background-color: variables.$secondary-color;
+    }
+}
+.about-btn{
+    margin-top: 20px;
+    @extend .btn; //inherits styles from .btn
+}
+header{
+    background-color: variables.$primary-color;
+    h1{
+        font-family: variables.$font-family;
+        font-size: variables.$font-size-h1;
+        color: variables.$background-color;
+    }
+    nav{
+        ul{
+            list-style: none;
+            padding: 0;
+            li{
+                display: inline;
+                margin-right: 20px;
+                a{
+                    color: variables.$color;
+                    text-decoration: none;
+                    font-size: variables.$font-size-p;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#skills{
+    padding: 50px 0;
+    p{
+        @include font-sizeStyle("large"); //using mixin for font size
+    }
+}

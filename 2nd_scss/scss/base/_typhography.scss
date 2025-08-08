@@ -1,0 +1,8 @@
+// Typography
+@use "../utils/index" as variables;
+h1,h2,h3,h4,h5,h6 {
+  font-family: variables.$font-family;
+  color: variables.$color;
+  line-height: variables.$line-height;
+  font-weight: variables.$font-weight-bold;
+}
